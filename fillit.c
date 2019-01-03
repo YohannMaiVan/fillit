@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 18:55:31 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/01/03 19:13:10 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/01/03 19:28:31 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ int		ft_check_line(char *str)
 	c = 1;
 	while (str[i])
 	{
-		if (str[i] == '\n' && str[i + 1] != '\n')
+		if (str[i] == '\n')
 			n++;
-		else if (str[i] == '\n' && str[i - 1] == '\n')
+		if (str[i] == '\n' && str[i - 1] == '\n')
+		{
 			c++;
+			n--;
+		}
 		i++;
 	}
 	if ((str[i - 1] == '\n' && str[i - 2] == '\n') || c > 26)
@@ -77,6 +80,6 @@ int		main(void)
 	fd = open("test.txt", O_RDONLY);
 	bzero(str, 547);
 	read(fd, str, 546);
-	printf("%d", ft_check_file(str));
+	printf("%d", ft_check_line(str));
 	return (0);
 }
