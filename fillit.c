@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 18:55:31 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/01/03 19:28:31 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/01/03 22:21:19 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,33 @@ int		ft_check_nb_carac(char *str)
 	return (0);
 }
 
+int		ft_check_tetriminos(char *str)
+{
+	int i;
+	int c;
+	int n;
+
+	i = 0;
+	c = 0;
+	n = 1;
+	while (str[i] && (str[i] == '.' || str[i] == '\n' || str[i] == '#'))
+	{
+		if (str[i] && (str[i] == '.' || str[i] == '\n'))
+			i++;
+		if (str[i++] == '#')
+			c++;
+		if (str[i] == '\n' && str[i - 1] == '\n')
+		{
+			if (c != n * 4)
+				return (0);
+			n++;
+		}
+	}
+	if (c == n * 4)
+		return (1);
+	return (0);
+}
+
 int		main(void)
 {
 	char *str;
@@ -80,6 +107,6 @@ int		main(void)
 	fd = open("test.txt", O_RDONLY);
 	bzero(str, 547);
 	read(fd, str, 546);
-	printf("%d", ft_check_line(str));
+	printf("%d", ft_check_nb_carac(str));
 	return (0);
 }
