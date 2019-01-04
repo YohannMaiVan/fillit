@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 18:55:31 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/01/03 22:21:19 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/01/04 18:14:26 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,44 @@ int		ft_check_tetriminos(char *str)
 	return (0);
 }
 
+int		ft_check_piece(char *str)
+{
+	int i;
+	int n;
+	int j;
+
+	i = 0;
+	n = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			j++;
+		if (str[i] == '#')
+		{
+			if (str[i + 1] == '#')
+				n += 2;
+			if (str[i + 5] == '#')
+			// if ((j != 3) && str[i + 5] == '#')
+			// CONDITION A VERIFIER POUR LIGNE FIN DE FICHIER CF TEST12 ET 16 FAUX
+				n += 2;
+		}
+		if ((str[i] == '\n' && str[i + 1] == '\n')
+		|| (str[i] == '\n' && str[i + 1] == '\0'))
+		{
+			if (n != 6 && n != 8)
+			{
+			printf("PASSAGE DE PRINT et valeur de n <%d>\n", n);
+				return (0);
+			}
+			n = 0;
+			j = 0;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int		main(void)
 {
 	char *str;
@@ -107,6 +145,9 @@ int		main(void)
 	fd = open("test.txt", O_RDONLY);
 	bzero(str, 547);
 	read(fd, str, 546);
-	printf("%d", ft_check_nb_carac(str));
+	// printf("Resultat du Check_line RETURN :<%d>", ft_check_line(str));
+	// printf("Resultat du Check_nb_carac RETURN :<%d>", ft_check_nb_carac(str));
+	// printf("Resultat du Check_tetriminos RETURN :<%d>", ft_check_tetriminos(str));
+	printf("Resultat du Check_piece RETURN :<%d>", ft_check_piece(str));
 	return (0);
 }
