@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 18:55:31 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/01/08 18:17:57 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/01/09 16:18:19 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,26 @@ int		check_piece(char *str)
 	return (1);
 }
 
+int		stock_tab(char *str)
+{
+	int		i;
+	int		n;
+	// char	**tab;
+
+	i = 0;
+	n = 0;
+	// tab = NULL;
+
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			n++;
+		i++;
+	}
+	printf("valeur de n <%d>", n);
+	return (n);
+}
+
 int		main(void)
 {
 	char *str;
@@ -186,10 +206,11 @@ int		main(void)
 	// fd = open("TEST/error_21", O_RDONLY);
 	bzero(str, 547);
 	read(fd, str, 546);
-	// printf("Resultat du Check_line RETURN :<%d>\n", check_line(str));
+	printf("Resultat du Check_line RETURN :<%d>\n", check_line(str));
 	printf("Resultat du Check_nb_carac RETURN :<%d>\n", check_nb_carac(str));
 	printf("Resultat du Check_CONTENT_GRID RETURN :<%d>\n", check_content_grid(str));
 	printf("Resultat du Check_piece RETURN :<%d>\n", check_piece(str));
+	stock_tab(str);
 	// getchar(); Pour verifier les leaks
 	return (0);
 }
