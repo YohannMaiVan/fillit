@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 18:55:31 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/01/04 18:14:26 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/01/08 18:17:57 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-int		ft_check_line(char *str)
+int		check_line(char *str)
 {
 	int i;
 	int n;
@@ -43,7 +43,7 @@ int		ft_check_line(char *str)
 	return (0);
 }
 
-int		ft_check_nb_carac(char *str)
+int		check_nb_carac(char *str)
 {
 	int i;
 	int cp;
@@ -71,7 +71,7 @@ int		ft_check_nb_carac(char *str)
 	return (0);
 }
 
-int		ft_check_tetriminos(char *str)
+int		check_content_grid(char *str)
 {
 	int i;
 	int c;
@@ -82,23 +82,74 @@ int		ft_check_tetriminos(char *str)
 	n = 1;
 	while (str[i] && (str[i] == '.' || str[i] == '\n' || str[i] == '#'))
 	{
-		if (str[i] && (str[i] == '.' || str[i] == '\n'))
-			i++;
-		if (str[i++] == '#')
+		if (str[i] == '#')
 			c++;
-		if (str[i] == '\n' && str[i - 1] == '\n')
+		if (str[i] == '\n' && str[i + 1] == '\n')
 		{
 			if (c != n * 4)
 				return (0);
 			n++;
 		}
+		i++;
 	}
 	if (c == n * 4)
 		return (1);
 	return (0);
 }
 
-int		ft_check_piece(char *str)
+int		count_touch(int *n, int *j)
+{
+	if (*n != 6 && *n != 8)
+		return (0);
+	*n = 0;
+	*j = 0;
+	return (1);
+}
+
+// int		check_piece(char *str)
+// {
+// 	int i;
+// 	int n;
+// 	int j;
+
+// 	i = 0;
+// 	n = 0;
+// 	j = 0;
+// 	while (str[i] != '\0')
+// 	{
+// 		if (str[i] == '\n')
+// 			j++;
+// 		if (str[i] == '#')
+// 		{
+// 			if (str[i + 1] == '#')
+// 				n += 2;
+// 			if ((j != 3) && str[i + 5] == '#')
+// 				n += 2;
+// 		}
+// 		if ((str[i] == '\n') && (str[i + 1] == '\n' || str[i + 1] == '\0'))
+// 		{
+// 			if (count_touch(&n, &j) == 0)
+// 				return (0);
+// 			i++;
+// 		}
+// 		i++;
+// 	}
+// 	return (1);
+// }
+
+int		count_link(char *str, int n, int j, int i)
+{
+	if (str[i] == '#')
+	{
+		if (str[i + 1] == '#')
+			n += 2;
+		if ((j != 3) && str[i + 5] == '#')
+			n += 2;
+	}
+	return (n);
+}
+
+int		check_piece(char *str)
 {
 	int i;
 	int n;
@@ -111,25 +162,14 @@ int		ft_check_piece(char *str)
 	{
 		if (str[i] == '\n')
 			j++;
-		if (str[i] == '#')
-		{
-			if (str[i + 1] == '#')
-				n += 2;
-			if (str[i + 5] == '#')
-			// if ((j != 3) && str[i + 5] == '#')
-			// CONDITION A VERIFIER POUR LIGNE FIN DE FICHIER CF TEST12 ET 16 FAUX
-				n += 2;
-		}
-		if ((str[i] == '\n' && str[i + 1] == '\n')
-		|| (str[i] == '\n' && str[i + 1] == '\0'))
+		n = count_link(str, n, j, i);
+		if ((str[i] == '\n') && (str[i + 1] == '\n' || str[i + 1] == '\0'))
 		{
 			if (n != 6 && n != 8)
-			{
-			printf("PASSAGE DE PRINT et valeur de n <%d>\n", n);
 				return (0);
-			}
 			n = 0;
 			j = 0;
+			i++;
 		}
 		i++;
 	}
@@ -143,11 +183,13 @@ int		main(void)
 
 	str = (char*)malloc(sizeof(char) * 547);
 	fd = open("test.txt", O_RDONLY);
+	// fd = open("TEST/error_21", O_RDONLY);
 	bzero(str, 547);
 	read(fd, str, 546);
-	// printf("Resultat du Check_line RETURN :<%d>", ft_check_line(str));
-	// printf("Resultat du Check_nb_carac RETURN :<%d>", ft_check_nb_carac(str));
-	// printf("Resultat du Check_tetriminos RETURN :<%d>", ft_check_tetriminos(str));
-	printf("Resultat du Check_piece RETURN :<%d>", ft_check_piece(str));
+	// printf("Resultat du Check_line RETURN :<%d>\n", check_line(str));
+	printf("Resultat du Check_nb_carac RETURN :<%d>\n", check_nb_carac(str));
+	printf("Resultat du Check_CONTENT_GRID RETURN :<%d>\n", check_content_grid(str));
+	printf("Resultat du Check_piece RETURN :<%d>\n", check_piece(str));
+	// getchar(); Pour verifier les leaks
 	return (0);
 }
