@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 13:05:09 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/01/09 17:45:44 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/01/10 20:40:19 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,68 @@ void	ft_print_words_tables(char **tab)
 	}
 }
 
+void	transform_into_letter(char **tab)
+{
+	int		i;
+	int		j;
+	char	k;
+
+	i = 0;
+	k = 'A';
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+		{
+			if (tab[i][j] == '#')
+				tab[i][j] = k;
+			if (tab[i][j] == '.')
+				tab[i][j] = '?';
+			j++;
+		}
+		k++;
+		i++;
+	}
+}
+// FONCTION A CORRIGER 
+void	del_empty_line(char **tab)
+{
+	int		i;
+	int		j;
+	char	k;
+
+	i = 0;
+	while (tab[i])
+	{
+		j = 0;
+		k = 0;
+		// while (tab[i][j] != '\n' && tab[i][j] == '?')
+		while (tab[i][j])
+		{
+			if (tab[i][k] == '?')
+				k++;
+			if (k == 4 && tab[i][j] == '\n')
+			{
+				k = 0;
+				j++;
+				while (tab[i][j])
+				{
+					tab[i][k] = tab[i][j];
+					k++;
+					j++;
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int		main(void)
 {
 	char *str;
 	int fd;
 	char **tab;
-
 
 	str = (char*)malloc(sizeof(char) * 547);
 	fd = open("test.txt", O_RDONLY);
@@ -94,6 +150,8 @@ int		main(void)
 	read(fd, str, 546);
 	tab = stock_tab(str);
 	int i  = 0;
+	transform_into_letter(tab);
+	del_empty_line(tab);
 	ft_print_words_tables(tab);
 	// printf("Resultat du Check_line RETURN :<%d>\n", check_line(str));
 	// getchar(); Pour verifier les leaks
