@@ -1,0 +1,6 @@
+*.o
+*.a
+.D*
+*.dSYM
+a.out
+libft.a
