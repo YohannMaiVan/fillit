@@ -6,7 +6,7 @@
 #    By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/05 19:40:56 by yomai-va          #+#    #+#              #
-#    Updated: 2019/01/16 21:27:06 by yomai-va         ###   ########.fr        #
+#    Updated: 2019/01/23 16:31:51 by yomai-va         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = fillit
 
-SRC = fillit.c stock_tab.c del_col.c
+SRC = fillit.c stock_tab.c del_col.c map.c
 
 CC = clang
 

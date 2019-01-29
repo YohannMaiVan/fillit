@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 23:25:46 by yomai-va          #+#    #+#             */
-/*   Updated: 2018/12/04 17:07:42 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/01/23 16:05:19 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ int					ft_checkblank(char *str);
 int					ft_digitlen(long nb);
 int					ft_nbwords(char const *str, char c);
 char				*ft_strrev(char *str);
+int					ft_sqrt(int nb);
 
 #endif

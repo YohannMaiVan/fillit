@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/15 21:30:34 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/01/28 16:26:27 by yomai-va         ###   ########.fr       */
+/*   Created: 2018/07/09 19:36:03 by yomai-va          #+#    #+#             */
+/*   Updated: 2019/01/23 16:12:36 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
-
-char	*ft_strnew(size_t size)
+int		ft_sqrt(int nb)
 {
-	char	*str;
-	size_t	i;
+	int i;
 
 	i = 0;
-	str = (char *)malloc(sizeof(char) * (size + 1));
-	if (str == NULL)
-		return (NULL);
-	while (i < size + 1)
+	while (i * i < nb)
 	{
-		str[i] = '\0';
+		if (i > 46340)
+			return (0);
 		i++;
 	}
-	return (str);
+	return (i);
 }

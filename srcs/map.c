@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 14:55:31 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/01/28 16:54:43 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:09:30 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**create_map(char **tab, int size)
 	int		line;
 
 	line = 0;
-	map = (char **)malloc(sizeof(char *) * size + 1);
+	map = (char **)malloc(sizeof(char *) * (size + 1));
 	while (line < size)
 	{
 		map[line] = ft_strnew(size);
@@ -99,15 +99,15 @@ char	**create_map(char **tab, int size)
 	return (map);
 }
 
-void	free_map(char **map)
-{
-	int		i;
+// void	free_map(char **map)
+// {
+// 	int		i;
 
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
+// 	i = 0;
+// 	while (map[i])
+// 	{
+// 		free(map[i]);
+// 		i++;
+// 	}
+// 	free(map);
+// }
