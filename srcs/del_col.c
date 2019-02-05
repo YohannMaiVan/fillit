@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 18:15:48 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/01/29 18:07:14 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/02/05 16:34:55 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,10 @@ char	**get_the_fuckin_piece(char **tab)
 
 int		main(void)
 {
-	char *str;
-	int fd;
-	char **tab;
+	char	*str;
+	int		fd;
+	char	**tab;
+	char	*map;
 
 	str = (char*)malloc(sizeof(char) * 547);
 	fd = open("test.txt", O_RDONLY);
@@ -109,23 +110,17 @@ int		main(void)
 	bzero(str, 547);
 	read(fd, str, 546);
 	tab = stock_tab(str);
-	int size = ft_sqrt(nb_pieces(tab) * 4);
 
-	char **map = create_map(tab, size);
+	tranform_line(tab);
+	tranform_colonne(tab);
+	del_empty_line(tab);
+	get_the_fuckin_piece(tab);
+	transform_into_letter(tab);
+	ft_print_words_tables(tab);
+	// printf("CREATION DE LA MAP:\n%s", create_map(tab));
+	map = create_map(tab);
+	printf("PLACEMENT DES PIECES:\n%s", place_piece(tab, map));
 
-	for (int line = 0; line < size; line++)
-	{
-		// printf("%s\n", map[line]);
-		for (int col = 0; col < size; col++) {
-			printf("%c", map[line][col]);
-		}
-		printf("\n");
-	}
-	// tranform_line(tab);
-	// tranform_colonne(tab);
-	// del_empty_line(tab);
-	// get_the_fuckin_piece(tab);
-	// ft_print_words_tables(tab);
 	return (0);
 }
 
