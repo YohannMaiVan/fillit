@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 19:56:49 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/02/05 16:33:59 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/02/06 21:07:37 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void		ft_print_words_tables(char **tab);
 int			nb_pieces(char **tab);
 // char		**create_map(char **tab, int size);
 char		*create_map(char **tab);
-char	*place_piece(char **tab, char *map);
+int			place_piece(char **tab, char *map, int piece, int xmap);
 
 #endif

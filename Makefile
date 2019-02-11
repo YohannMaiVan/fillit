@@ -6,7 +6,7 @@
 #    By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/05 19:40:56 by yomai-va          #+#    #+#              #
-#    Updated: 2019/02/05 16:34:20 by yomai-va         ###   ########.fr        #
+#    Updated: 2019/02/07 14:05:38 by yomai-va         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJ = $(addprefix ${OBJDIR}/, $(SRC:.c=.o))
 
 DEP = $(addprefix ${OBJDIR}/, $(SRC:.c=.d))
 
-CFLAGS = -Wall -Wextra -fsanitize=address,undefined -g -MMD
+CFLAGS = -Wall -Wextra -fsanitize=address,undefined -g3 -MMD
 
 LDFLAGS = -Ilibft/includes/ -Iincludes/
 

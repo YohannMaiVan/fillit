@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 18:15:48 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/02/05 16:34:55 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/02/11 17:42:17 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,13 @@ int		main(void)
 	get_the_fuckin_piece(tab);
 	transform_into_letter(tab);
 	ft_print_words_tables(tab);
-	// printf("CREATION DE LA MAP:\n%s", create_map(tab));
+	printf("CREATION DE LA MAP:\n%s", create_map(tab));
 	map = create_map(tab);
-	printf("PLACEMENT DES PIECES:\n%s", place_piece(tab, map));
+	//printf("\nLA MAP \n%s", map);
+	int piece = 0; int xmap = 0;
+	// printf("PLACEMENT DES PIECES:\n%s", place_piece(tab, map, piece, xmap));
+	place_piece(tab, map, piece, xmap);
+	printf("\nLA MAP2 \n%s", map);
 
 	return (0);
 }
