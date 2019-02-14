@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 14:55:31 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/02/04 15:57:47 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/02/14 15:29:20 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*create_map(char **tab)
 	j = 0;
 	// o = ft_sqrt(nb_pieces(tab) * 4);
 	// COTE DE 6 POUR LES TESTS
-	o = 6; 
+	o = 7; 
 	map = (char *)malloc(sizeof(char) * (o * o + o + 1));
 	while (i < o * o + o)
 	{
