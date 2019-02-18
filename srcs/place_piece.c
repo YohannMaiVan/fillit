@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:44:38 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/02/14 16:12:26 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/02/18 20:06:35 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,27 @@
 int		nextline(char *map, int xmap, int first)
 {
 	int line;
+	int sizemap;
 
+	sizemap = 0;
 	line = 0;
+	while (map[sizemap])
+		sizemap++;
 	while (map[line] != '\n')
 		line++;
 	while (map[xmap] != '\n')
 		xmap++;
-	while (first <= xmap)
-		first = first + line + 1;
-	if (first > line * line)
+	if (map[xmap] == '\n' && map[xmap + 1] != '\0')
+	{
+		while (first < xmap)
+			first = first + line + 1;
+		if (first < sizemap)
+			return (first);
+		else
+			return (-1);
+	}
+	else
 		return (-1);
-	return (first);
 }
 
 int		nextpoint(char *map, int xmap)
@@ -40,130 +50,14 @@ int		nextpoint(char *map, int xmap)
 	return (xmap);
 }
 
-// int		check_place(char **tab, char *map, int piece, int xmap)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (tab[piece][i] != '\n')
-// 		i++;
-// 	while (map[xmap] != '\n')
-// 	{
-// 		xmap++;
-// 	}
-// 	while (map[xmap])
-// 	{
-// 		if (xmap < i)
-// 		{
-// 			while (!(map[xmap] == '.'))
-// 				xmap++;
-// 			return (xmap);
-// 		}
-// 	}
-// }
-
-
-// int		place_piece(char **tab, char *map, int piece, int xmap)
-// {
-// 	int i;
-// 	int	first;
-
-// 	first = 0;
-// 	i = 0;
-// 	if (!tab[piece])
-// 		return (-1);
-// 	while (map[xmap])
-// 	{
-// 		while (tab[piece] && tab[piece][i] != '\0')
-// 		{
-// 			if (tab[piece][i] != '.')
-// 			{
-// 				printf("TEST1\n");
-// 				if (i == 0)
-// 					first = xmap;
-// 				if (tab[piece][i + 1] == '\0' && tab[piece][i] == '\n')
-// 				{
-// 					// printf("retour de nextpoint <%d>\n", nextpoint(map, xmap));
-// 					place_piece(tab, map, ++piece, nextpoint(map, xmap));
-// 					return (0);
-// 				}
-// 				else
-// 				{
-// 					map[xmap++] = tab[piece][i++];
-// 				}
-// 			}
-// 			if (tab[piece][i] == '\n' && tab[piece][i + 1] != '\0')
-// 			{
-// 				printf("TEST2\n");
-// 				i++;
-// 				xmap = nextline(map, xmap, first);
-// 			}
-// 			if (map[xmap] == '\n' && map[xmap + 1] != '\0')
-// 			{
-// 				printf("TEST3\n");
-// 				xmap = nextline(map, xmap, first);
-// 				printf("retour de nextpoint <%d>\n", nextpoint(map, xmap));
-// 				// xmap = nextpoint(map, xmap);
-// 			}
-// 		}
-// 		printf("TEST5\n");
-// 		xmap++;
-// 	}
-// 	return (0);
-// }
-
-// int		place_piece(char **tab, char *map, int piece, int xmap)
-// {
-// 	int i;
-// 	int	first;
-
-// 	first = 0;
-// 	i = 0;
-// 	if (!tab[piece])
-// 		return (-1);
-// 	while (tab[piece] && tab[piece][i] != '\0')
-// 	{
-// 		if (tab[piece][i] != '.')
-// 		{
-// 			// printf("TEST1\n");
-// 			if (i == 0)
-// 				first = xmap;
-// 			if (tab[piece][i + 1] == '\0' && tab[piece][i] == '\n')
-// 			{
-// 				printf("\nL'etat de la map: \n%s", map);
-
-// 				// printf("retour de nextpoint <%d>\n", nextpoint(map, xmap));
-// 				place_piece(tab, map, ++piece, nextpoint(map, xmap));
-// 				return (0);
-// 			}
-// 			else
-// 			{
-// 				map[xmap++] = tab[piece][i++];
-// 			}
-// 		}
-// 		if (tab[piece][i] == '\n' && tab[piece][i + 1] != '\0')
-// 		{
-// 			// printf("TEST2\n");
-// 			i++;
-// 			xmap = nextline(map, xmap, first);
-// 		}
-// 		if (map[xmap] == '\n' && map[xmap + 1] != '\0' && map[xmap] != tab[piece][i])
-// 		{
-// 			// printf("TEST3\n");
-// 			xmap = nextline(map, xmap, first);
-// 			printf("retour de nextpoint <%d>\n", nextpoint(map, xmap));
-// 			fflush(stdout);
-// 		}
-// 	}
-// 	return (0);
-// }
-
 int		place_piece(char **tab, char *map, int piece, int xmap)
 {
-	int i;
-	int	first;
-	int point;
+	int		i;
+	int		first;
+	int		point;
+	char	*save;
 
+	save = NULL;
 	point = 0;
 	first = 0;
 	i = 0;
@@ -175,9 +69,9 @@ int		place_piece(char **tab, char *map, int piece, int xmap)
 	{
 		if (tab[piece][i] != '.' && tab[piece][i] != '\0')
 		{
-			if (map[xmap] == '.')
+			if (map[xmap] == '.' && tab[piece] && map[xmap])
 			{
-				
+
 				map[xmap] = tab[piece][i];
 				printf("--------------------> Map: \n%s", map);
 			}
@@ -186,9 +80,7 @@ int		place_piece(char **tab, char *map, int piece, int xmap)
 		}
 		xmap++;
 		i++;
-		// printf("MON XMAP <%d>\n", xmap);
-		// printf("VALEUR DE i <%d>\n", i);
-				fflush(stdout);
+		fflush(stdout);
 		if (tab[piece][i] == '\n')
 		{
 			i++;
@@ -197,24 +89,34 @@ int		place_piece(char **tab, char *map, int piece, int xmap)
 				++piece;
 				if (!(tab[piece]))
 					return (0);
+				save = ft_strdup(map);
 				while (place_piece(tab, map, piece, point) == -1)
 				{
-				printf("\nL'etat de la map: \n%s", map);
-				point++;
-				printf("PIECE <%d>\n", piece);
+					ft_strcpy(map, save);
+					fflush(stdout);
+					point++;
+					fflush(stdout);
+					if (map[point] == '\0')
+						return (-1);
 				}
 				return (0);
 			}
 			else if (tab[piece][i] != '\0')
-				xmap = nextline(map, xmap, first);
-		}
-		if (map[xmap] == '\n' && map[xmap + 1] != '\0')
-		{
-			// printf("TEST3\n");
-			xmap = nextline(map, xmap, first);
-			printf("retour de nextpoint <%d>\n", nextpoint(map, xmap));
-			fflush(stdout);
+					xmap = nextline(map, xmap, first);
 		}
 	}
 	return (0);
 }
+
+			// printf("VALEUR DE XMAP<%d>\n", xmap);
+			// printf("VALUE MAP XMAP <%c>\n", map[xmap]);
+			// printf("VALUE COUNTER XMAP <%d>\n", xmap);
+			// printf("VALUE TAB[PIECE][I] <%c>\n", tab[piece][i]);
+			// printf("VALUE MAP XMAP <%c>\n", map[xmap]);
+			// printf("VALUE COUNTER XMAP <%d>\n", xmap);
+			// printf("MON XMAP <%d>\n", xmap);
+			// printf("VALEUR DE i <%d>\n", i);
+			// printf("VALUE TAB[PIECE][I] <%c>\n", tab[piece][i]);
+			// printf("VALUE DE SAVE \n%s \n", save);
+			// printf("\nL'etat de la map: \n%s", map);
+			// printf("PASSAGE DANS BOUCLE ERREUR valeur de point <%d>\n", point);
