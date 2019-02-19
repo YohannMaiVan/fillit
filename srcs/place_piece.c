@@ -6,7 +6,7 @@
 /*   By: yomai-va <yomai-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:44:38 by yomai-va          #+#    #+#             */
-/*   Updated: 2019/02/19 13:36:38 by yomai-va         ###   ########.fr       */
+/*   Updated: 2019/02/19 13:51:47 by yomai-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,13 @@ int		place_piece(char **tab, char *map, int piece, int xmap)
 				return (0);
 			}
 			else if (tab[piece][i] != '\0')
-					// if (!(xmap = nextline(map, xmap, first) == -1))
-					// 	return (0);
+				// if (!(xmap = nextline(map, xmap, first) == -1))
+				// 	return (0);
+				{
 					if (nextline(map, xmap, first) == -1)
 						return (0);
 					xmap = nextline(map, xmap, first);
+				}
 		}
 	}
 	return (0);
